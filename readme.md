@@ -46,6 +46,56 @@ $ php artisan migrate
 ```
 
 
+**Add Passport Routes**
+
+In AuthServiceProvider.php
+
+``` php
+namespace App\Providers;
+
+use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+
+class AuthServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        $this->registerPolicies();
+
+        Passport::routes();
+    }
+}
+
+```
+
+
+**Set Passport as Auth's API driver**
+
+In config/auth.php
+
+``` php
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+
+    'api' => [
+        'driver' => 'passport',
+        'provider' => 'users',
+    ],
+],
+```
+
+
+**Install Laravel Cors**
+
+``` bash
+$ composer require barryvdh/laravel-cors
+```
+
+
 ## Examples
 
 
@@ -68,7 +118,7 @@ $ php artisan migrate
 
 ## Contributing
 
-...
+If you have any suggestions or improvements open an issue.
 
 <!-- ### Security
 

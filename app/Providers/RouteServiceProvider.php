@@ -67,6 +67,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
              ->middleware('api')
+            //  ->middleware(\Barryvdh\Cors\HandleCors::class,
+            // 'throttle:60,1',
+            // 'bindings')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
